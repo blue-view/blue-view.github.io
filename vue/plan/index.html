@@ -11,11 +11,11 @@
     <div id="app">
         <div class="top">
             <div class="page-content">
-              <h2>任务计划列表</h2>
+              <h3>任务计划列表</h3>
             </div>
-          </div>
+        </div>
           <div class="main">
-            <h3 class="big-title">添加任务</h3>
+            <h4 class="big-title">添加任务:</h4>
             <input v-model="todo" 
             type="text" 
             placeholder="例如：吃饭睡觉打豆豆：提示：+回车即可添加任务" 
@@ -24,20 +24,23 @@
             <ul class="task-count" v-show="list.length>0">
               <li>{{noCheckedLength}}个任务未完成</li>
               <li class="action">
-                <a href="#all">所有任务</a>
-                <a href="#unfinished">未完成任务</a>
-                <a href="#finished">完成的任务</a>
+                <a href="#all" :class="{selected:selectPlan==='all'}">所有任务</a>
+                <a href="#unfinished" :class="{selected:selectPlan==='unfinished'}">未完成任务</a>
+                <a href="#finished" :class="{selected:selectPlan==='finished'}">完成的任务</a>
               </li>
             </ul>
-            <h3 class="big-title">任务列表</h3>
+            <h4 class="big-title">任务列表:</h4>
             <div class="tasks">
               <span class="no-task-tip" v-show="list.length==0">还没有添加任何任务</span>
-              <ul class="toto-list">
-                <li class="toto" :class="{completed:value.ischecked,editing:value===editorTodos}" v-for="(value,key) in list" v-bind:key="key">
+              <ul class="todo-list">
+                <li class="todo" 
+                :class="{completed:value.ischecked,editing:value===editorTodos}"
+                 v-for="(value,key) in filteredList"
+                  v-bind:key="key">
                   <div class="view">
                     <input type="checkbox" class="toggle"  v-model="value.ischecked">
                     <label for="" @dblclick="editorTodo(value)">{{value.title}}</label>
-                    <button class="destroy" @click="deleteToDo(value)">x</button>
+                    <button class="destroy" @click="deleteToDo(value)">X</button>
                   </div>
                   <input 
                    v-focus="editorTodos===value"

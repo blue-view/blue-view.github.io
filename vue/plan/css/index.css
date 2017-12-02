@@ -1,22 +1,135 @@
+*{
+  padding:0;
+  border:0;
+  margin:0;
+}
 #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-align: center;
     color: #2c3e50;
-    margin-top: 60px;
   }
   ul li{
     list-style: none;
   }
-.completed {
+  .top{
+    width: 100%;
+    height: 40px;
+    background: orangered;
+    color: white;
+    line-height: 40px;
+    vertical-align: middle;
+  }
+  .top .page-content{
+    width:700px;
+    margin: 0 auto;
+  }
+  .main{
+    width:700px;
+    margin: 0 auto;
+  }
+  .main .big-title{
+   
+    margin: 20px 0;
+  }
+  .main .task-input{
+    border:1px solid #ccc;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    box-sizing: border-box;
+  }
+  .main .task-count{
+    display: block;
+    width: 100%;
+    clear: both;
+    margin: 10px 0;
+    overflow: hidden;
+    height: 35px;
+  }
+  .main .task-count li{
+    display: inline-block;
+    font-size: 14px;
+  }
+  .main .task-count li:first-child{
+    float: left;
+    color:red;
+  }
+  .main .task-count li:last-child{
+    float: right;
+  }
+  .main .task-count li.action a{
+    display: inline-block;
+    text-decoration: none;
+    color: #2c3e50;
+    width: 80px;
+    text-align: center;
+    height: 35px;
+    line-height: 35px;
+    box-sizing: border-box;
+  }
+  .main .task-count li.action a:hover{
+    color: red;
+  }
+  .main .task-count li.action .selected{
+    color: red;
+  }
+  .main .tasks .todo-list{
+    
+  }
+  .main .tasks .todo-list li{
+    width: 100%;
+    height: 41px;
+    /* background:rgb(236, 205, 205); */
+    border-bottom:1px solid #ccc;
+    box-sizing: border-box;
+  } 
+  .main .tasks .todo-list li div.view input{
+    display: inline-block;
+    float:left;
+    width: 20px;
+    height: 20px;
+    margin-top: 10px;
+  }
+  .main .tasks .todo-list li div.view label{
+    display: inline-block;
+    float:left;
+    height: 40px;
+    line-height: 40px;
+    text-indent: 20px;
+    width: 660px;
+    font-size: 14px;
+    color: #2c3e50;
+  }
+  .main .tasks .todo-list li div.view button{
+    display: inline-block;
+    float:right;
+    height: 40px;
+    line-height: 40px;
+    vertical-align: middle;
+    text-align: center;
+    width: 20px;
+    background: white;
+  }
+  .main .tasks .todo-list li input.edit{
+    width: 100%;
+    height: 41px;
+    line-height: 41px;
+    vertical-align: middle;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    outline:none;
+    font-size: 14px;
+    color: #2c3e50;
+  }
+
+.completed label{
     color: gray;
     text-decoration: line-through;
   }
   .toto-list .toggle {
     width: 20px;
     height: 20px;
-    border-radius: 50%;
   }
   .toto-list label {
     height: 20px;
