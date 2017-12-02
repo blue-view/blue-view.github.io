@@ -1,0 +1,37 @@
+#app {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 60px;
+  }
+  ul li{
+    list-style: none;
+  }
+.completed {
+    color: gray;
+    text-decoration: line-through;
+  }
+  .toto-list .toggle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+  }
+  .toto-list label {
+    height: 20px;
+    line-height: 20px;
+    vertical-align: middle;
+  }
+  .editing .edit{
+    display: inline;
+  }
+  .editing .view{
+    display: none;
+  }
+  .view{
+    display: inline;
+  }
+  .edit{
+    display:none;
+  }
