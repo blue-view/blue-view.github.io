@@ -1,0 +1,80 @@
+* {
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+ul li {
+    list-style: none;
+}
+
+#app {
+    width: 460px;
+    margin: 50px auto;
+    box-sizing: border-box;
+}
+
+.wrap {
+    margin-top: 50px;
+    padding: 30px 80px;
+    border-radius: 10px;
+    border: 2px solid #ccc;
+    box-shadow: 5px 5px 2px #ccc;
+    box-sizing: border-box;
+}
+
+.searchIpt {
+    background: #8ac5f5;
+    width: 300px;
+    border-radius: 20px;
+    border: 2px solid #8ac5f5;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-bottom:10px;
+    box-sizing: border-box;
+}
+.searchIpt .searchtop{
+    margin-bottom: 10px;
+}
+.searchIpt input.keyword{
+    width:200px;
+    display: inline-block;
+    height: 26px;
+    line-height: 26px;
+    vertical-align: middle;
+    background:#fff;
+    border-radius:13px; 
+    outline: none;
+    color: #000;
+    text-indent: 10px;
+    
+}
+.searchIpt input.btn{
+    width:50px;
+    display: inline-block;
+    height: 26px;
+    line-height: 26px;
+    vertical-align: middle;
+    background:red;
+    border-radius:13px; 
+    outline: none;
+}
+.searchIpt ul{
+    width:200px;
+    
+}
+.searchIpt ul.list{
+    padding-top:5px;
+    padding-bottom: 5px;
+    border-radius:13px; 
+}
+.searchIpt ul.list li{
+    display:block;
+    color: black;
+    padding: 5px 10px;
+}
+.searchIpt ul.list li:hover{
+    background: white;
+    color: blue;
+    cursor: default;
+}
