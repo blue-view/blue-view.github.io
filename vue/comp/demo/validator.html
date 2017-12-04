@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>单项数据流</title>
+</head>
+
+<body>
+    <!-- 不能改变父组件传入的数据 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <div id="app">
+        {{count}}
+        <custom-comp :count="count" @increment-click="countHandle"></custom-comp>
+    </div>
+
+    <script>
+        //全局组件
+        //count传入的类型为Number
+        Vue.component("custom-comp", {
+            props: {
+                count: {
+                    // type:Number,
+                    // type:[Number,String],
+                    // default:10,
+                    // required:true,
+                    validator: function (value) {
+                        console.log(value);
+                        return value>10;
+                    }
+                }
+            },
+            data() {
+                return {
+                    incrementCount: this.count
+                }
+            },
+            computed: {
+                incrementCount2() {
+                    var c = this.incrementCount;
+                    return c++;
+                }
+            },
+            template: `<div>
+                <h2>
+                    我是一个自定义组件
+                </h2>
+                <input type="button" value="改变count的值" @click="changeCount">
+                {{incrementCount}}
+            </div>
+            `,
+            methods: {
+                changeCount() {
+                    this.incrementCount++;
+                    //通知父组件发生了改变
+                    this.$emit("increment-click");
+                }
+            }
+        });
+        new Vue({
+            el: "#app",
+            data: {
+                count: 0
+            },
+            methods: {
+                countHandle() {
+                    // alert('子组件');
+                    this.count++;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

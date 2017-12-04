@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>slot内容分发</title>
+</head>
+
+<body>
+    <!-- 不能改变父组件传入的数据 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <div id="app">
+        <h2>
+            我是一个自定义组件
+        </h2>
+
+        <custom-comp>
+            <!-- 渲染的数据是父组件中数据 -->
+            {{message}}
+        </custom-comp>
+    </div>
+    <script>
+        Vue.component("custom-comp", {
+            data() {
+                return {
+                    message: "我是子组件的数据"
+                }
+            },
+            template: `
+                <div>
+                {{message}}
+                    <p>我是第一个提醒</p>
+                    <slot></slot>
+                </div>
+            `
+        });
+        new Vue({
+            el: "#app",
+            data: {
+                message: "我是父组件的数据"
+            }
+        });
+    </script>
+</body>
+
+</html>

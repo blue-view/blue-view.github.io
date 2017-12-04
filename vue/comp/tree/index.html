@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>tree</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            border: 0;
+        }
+
+        #app {
+            padding: 100px;
+        }
+
+        ul li {
+            list-style: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <m-tree :data="list"></m-tree>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        Vue.component("m-tree-list", {
+            props: {
+                data: {
+                    type: Array,
+                    default: []
+                },
+                incrementCount: {
+                    type: Number,
+                    default: 0
+                }
+            },
+            computed: {
+                count() {
+                    console.log(this.incrementCount);
+                    var c = this.incrementCount;
+                    return ++c;
+                },
+                stylePadding() {
+                    return {
+                        'padding-left': this.count * 16 + "px"
+                    }
+                }
+            },
+            template: `
+            <ul>
+                    <li v-for="item of data" >
+                        <div :style="[stylePadding]">
+                            <span>{{item.title}}</span>
+                        </div>
+                        <m-tree-list
+                         :increment-count="count"
+                         :data="item.children"
+                         v-if="item.children"
+                         >
+                         </m-tree-list>
+                    </li>
+                </ul>
+            `
+        });
+        Vue.component("m-tree", {
+            props: {
+                data: {
+                    type: Array,
+                    default: []
+                }
+            },
+            template: `
+            <div>
+               <m-tree-list :data="data"></m-tree-list>
+            </div>
+            `
+        });
+        var data = [{
+            title: "目录",
+            children: [{
+                title: "我的音乐",
+                children: [{
+                    title: "周杰伦",
+                    children: [{
+                        title: "发如雪"
+                    }, ]
+                }, {
+                    title: "刘德华",
+                    children: [{
+                        title: "冰雨"
+                    }, ]
+                }]
+            }, {
+                title: "我的书籍",
+                children: [{
+                    title: "精通javascrpt",
+                    children: [{
+                        title: "厉海阳",
+                    }]
+
+                }]
+            }]
+        }];
+        new Vue({
+            el: "#app",
+            data: {
+                list: data
+            }
+        });
+    </script>
+</body>
+
+</html>
