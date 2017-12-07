@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>日历</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .canlendar {
+            width: 1000px;
+            height: 630px;
+            /* border: 1px solid #333; */
+            margin: 0 auto;
+        }
+
+        .tablebox1 {
+            position: relative;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table.bgtable thead tr th {
+            height: 30px;
+        }
+
+        table.bgtable tbody tr td {
+            height: 100px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            text-align: right;
+            padding: 4px;
+            vertical-align: top;
+            box-sizing: border-box;
+        }
+
+        .gary {
+            background-color: #eee;
+        }
+
+        .teblebox2 {
+            position: absolute;
+            top: 30px;
+            width: 100%;
+            height: 600px;
+            /* border: 1px solid red; */
+            box-sizing: border-box;
+        }
+
+        .teblebox2 .row {
+            height: 100px;
+            /* border: 1px solid blue; */
+            box-sizing: border-box;
+            padding-top: 30px;
+        }
+
+        .teblebox2 .row .schtable {
+            width: 100%;
+            height: 70px;
+            /* border: 1px solid green; */
+            box-sizing: border-box;
+        }
+
+        .teblebox2 .row .schtable tr {
+            height: 20px;
+            /* background: blue; */
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .teblebox2 .row .schtable tr:nth-child(2) {
+            /* background-color: greenyellow; */
+        }
+
+        .teblebox2 .row .schtable tr:nth-child(3) {
+            /* background: gold; */
+        }
+
+        .teblebox2 .row .schtable tr td {
+            /* background: -webkit-linear-gradient(left, blue, white); */
+            box-sizing: border-box;
+            width: 14.2857%;
+            padding: 0 2px;
+        }
+
+        .teblebox2 .row .schtable tr {
+            border-radius: 15px;
+        }
+
+        .teblebox2 .row .schtable tr td div.s {
+            background: yellowgreen;
+            border-radius: 15px;
+            font-size: 12px;
+            height: 20px;
+            line-height: 20px;
+            padding-left: 10px;
+        }
+
+        .teblebox2 .row .schtable tr td div.import {
+            background: blue;
+            border-radius: 15px;
+            font-size: 12px;
+            height: 20px;
+            line-height: 20px;
+            padding-left: 10px;
+            color: white;
+        }
+
+        .teblebox2 .row .schtable tr td div.red {
+            background: red;
+            border-radius: 15px;
+            font-size: 12px;
+            height: 20px;
+            line-height: 20px;
+            padding-left: 10px;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="canlendar" id="app">
+        <div class="tablebox1">
+            <table class="bgtable">
+                <thead>
+                    <tr>
+                        <th v-for="(item,index) in weeks">
+                            {{item}}
+                        </th>
+                    </tr>
+                    <tbody>
+                        <tr v-for="(week,index) in theWeek()">
+                            <td v-for="(item, index) in week" :class="{'gary':item.prevmonth||item.nextmonth}">
+                                {{item.day}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </thead>
+            </table>
+            <div class="teblebox2">
+                <div class="row" v-for="(row,index) in domdata">
+                    <table class="schtable">
+                        <tr v-for="(line,index2) in row">
+                            <td v-for="(td,index3) in line" :colspan="td.colspan">
+                                <div v-if="td.title!=''" :class="['s',td.type]">{{td.title}}</div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                weeks: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"],
+                dayarr: [],
+                year: 2017,
+                month: 5,
+                schedules: [
+                    {"title":"开会3天","start":"20170430","end":"20170502","type":"life"},
+                    {
+                        "title": "吃饭18天",
+                        "start": "20170510",
+                        "end": "20170527",
+                        "type": "import"
+                    },
+                    {"title":"玩游戏4天","start":"20170517","end":"20170520","type":"life"},
+                ],
+                domdata: [],
+                daythingnumber: [
+                    [0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0],
+                    [0, 0, 0, 0, 0, 0, 0]
+                ]
+            },
+            mounted: function () {
+                var dayarr = [];
+                //知道第一天星期几
+                var themonth1stweek = (new Date(this.year, this.month - 1, 1)).getDay();
+                //就是这个越的最后一天，就是下个月的第一天减1毫秒的那天
+                var y = this.month == 12 ? this.year + 1 : this.year;
+                var m = this.month == 12 ? 1 : this.month;
+                //上一年和上一月
+                var _y = this.month == 1 ? this.year - 1 : this.year;
+                var _m = this.month == 1 ? 12 : this.month - 1;
+                //下个月减去1就是当前月
+                var themonthacountday = new Date(new Date(y, m, 1) - 1).getDate();
+                //上个月
+                var preMonthlastdate = new Date(new Date(this.year, this.month - 1, 1) - 1).getDate();
+                // alert(themonththisday);
+                // alert(preMonthlastdate);
+                while (themonth1stweek-- > 0) {
+                    dayarr.unshift({
+                        "day": preMonthlastdate--,
+                        "prevmonth": true,
+                        "year": _y,
+                        "month": _m,
+                        "occupution": []
+                    });
+                }
+                //放置本月的日期
+                var count = 0;
+                while (themonthacountday--) {
+                    dayarr.push({
+                        "day": ++count,
+                        "year": this.year,
+                        "month": this.month,
+                        "occupution": []
+                    });
+                }
+
+                //不足35项
+                var count2 = 1;
+                if (dayarr.length < 35) {
+                    while (dayarr.length != 35) {
+                        dayarr.push({
+                            "day": count2++,
+                            "nextmonth": true,
+                            "year": y,
+                            "month": m,
+                            "occupution": []
+                        });
+                    }
+                } else {
+                    while (dayarr.length != 42) {
+                        dayarr.push({
+                            "day": count2++,
+                            "nextmonth": true,
+                            "year": y,
+                            "month": m,
+                            "occupution": []
+                        });
+                    }
+                }
+
+                // console.log(dayarr.length);
+                // console.log(dayarr);
+                this.dayarr = dayarr;
+                // console.log(dayarr);
+                this.caclDomData(dayarr, this.schedules);
+
+
+            },
+            methods: {
+                theWeek: function () {
+                    //return this.dayarr.slice(number * 7, (number + 1) * 7)
+                    var _arr = [];
+                    for (var i = 0; i < this.dayarr.length / 7; i++) {
+                        var _week = [];
+                        for (var j = 0; j < 7; j++) {
+                            _week.push(this.dayarr[i * 7 + j]);
+                        }
+                        _arr.push(_week);
+                    }
+                    return _arr;
+                },
+                caclDomData(dayarr, schedules) {
+                    //第一个问题，我们需要返回的数组中每一个项代表那天
+                    //第二个问题，每一个日程写在哪个line中
+                    //第三个问题，添加colspan的小格，此时要注意删除这个多余的小格
+                    var domData = this.dayarr.length == 42 ? [
+                        [
+                            [],
+                            [],
+                            []
+                        ],
+                        [
+                            [],
+                            [],
+                            []
+                        ],
+                        [
+                            [],
+                            [],
+                            []
+                        ],
+                        [
+                            [],
+                            [],
+                            []
+                        ],
+                        [
+                            [],
+                            [],
+                            []
+                        ],
+                        [
+                            [],
+                            [],
+                            []
+                        ]
+                    ] : [
+                        [
+                            [],
+                            [],
+                            []
+                        ],
+                        [
+                            [],
+                            [],
+                            []
+                        ],
+                        [
+                            [],
+                            [],
+                            []
+                        ],
+                        [
+                            [],
+                            [],
+                            []
+                        ],
+                        [
+                            [],
+                            [],
+                            []
+                        ]
+                    ];
+                    // domData.forEach(function(row,index1){
+                    //     row.forEach(function(line,index2){
+                    //         for(var i=0;i<7;i++){
+                    //             // console.log(index1*7+i);
+                    //             // console.log();
+                    //             var theday=dayarr[index1*7+i];
+                    //             line.push({
+                    //                 "year":theday.year,
+                    //                 "month":theday.month,
+                    //                 "day":theday.day,
+                    //                 "baseline":0
+                    //             });
+
+                    //         }
+                    //     });
+                    // });
+                    // // console.log(domData);
+                    // schedules.forEach(function(schedule,index){
+                    //     var year=schedule.start.substr(0,4);
+                    //     var month=schedule.start.substr(4,2);
+                    //     var day=schedule.start.substr(6,2);
+
+                    //     var endyear=schedule.end.substr(0,4);
+                    //     var endmonth=schedule.end.substr(4,2);
+                    //     var endday=schedule.end.substr(6,2);
+
+                    //     //跨度
+                    //     var colspan=((new Date(endyear,endmonth,endday))-
+                    //     (new Date(year,month,day)))/(1000*60*60*24)+1;
+
+                    //     domData.forEach(function(row,index1){
+                    //     row.forEach(function(line,index2){
+                    //         for(var i=0;i<7;i++){
+                    //             // console.log(line[i]);
+                    //             let thetd=line[i];
+                    //             if(thetd.year==year
+                    //             &&thetd.month==month
+                    //             &&thetd.day==day
+                    //             &&thetd.baseline==index2){
+                    //                 thetd.title=schedule.title;
+                    //                 thetd.colspan=colspan;
+                    //                 thetd.type=schedule.type;
+                    //                 // for(var nn=i;nn<i+colspan;nn++){
+                    //                 //     line[nn].baseline++;
+                    //                 // }
+                    //             }
+                    //         }
+                    //     });
+                    // });
+                    // });
+                    for (let rowIndex = 0; rowIndex < dayarr.length / 7; rowIndex++) {
+                        //化整为零,讲dayarr这个 35项或者42项的数组，变为一个小数组
+                        let weekdarr = dayarr.slice(rowIndex * 7, rowIndex * 7 + 7);
+                        //遍历这一周的事情
+                        weekdarr.forEach((theday, index) => {
+                            // console.count(item);
+                            var thedayschedlues = [];
+                            schedules.forEach(function (theschedules, index2) {
+                                var year = theschedules.start.substr(0, 4);
+                                var month = theschedules.start.substr(4, 2);
+                                var day = theschedules.start.substr(6, 2);
+                                var endyear = theschedules.end.substr(0, 4);
+                                var endmonth = theschedules.end.substr(4, 2);
+                                var endday = theschedules.end.substr(6, 2);
+
+                                //跨度
+                                theschedules.colspan = ((new Date(endyear, endmonth - 1, endday)) -
+                                    (new Date(year, month - 1, day))) / (1000 * 60 * 60 *
+                                    24) + 1;
+                                if (theday.year == year &&
+                                    theday.month == month &&
+                                    theday.day == day) {
+                                    // console.log(theschedules.title,theschedules.start);
+                                    thedayschedlues.push(theschedules);
+                                }
+                            });
+
+                            for (let line = 0; line < 3; line++) {
+                                if (theday.occupution.indexOf(line) == -1) {
+                                    var first = thedayschedlues.shift(); //出栈
+                                    if (first === undefined) {
+                                        domData[rowIndex][line].push({
+                                            "title": "",
+                                            "colspan": 1
+                                        });
+                                    } else {
+                                        domData[rowIndex][line].push({
+                                            "title": first.title,
+                                            "colspan": first.colspan,
+                                            "type": first.type
+                                        });
+                                        if (first.colspan && first.colspan != 1) {
+                                            let end = index + first.colspan - 1 > 6 ? 6 : index + first
+                                                .colspan - 1;
+                                            //还剩
+                                            let rest = (first.colspan - (7 - index));
+                                            for (let _i = index + 1; _i <= end; _i++) {
+                                                weekdarr[_i].occupution.push(line);
+                                            }
+
+                                            var _rest; //本周还剩
+                                            var count = 0; //数量，与当前正在遍历的周差了几周
+
+                                            while (rest > 0) {
+                                                _rest = rest > 7 ? 7 : rest;
+                                                rest -= _rest;
+                                                count++;
+                                                //下一周
+                                                var nextweek = dayarr.slice((rowIndex + count) * 7, (
+                                                    rowIndex + count) * 7 + 7);
+                                                domData[rowIndex + count][line].push({
+                                                    "title": first.title,
+                                                    "colspan": _rest,
+                                                    "type": first.type
+                                                });
+                                                // console.log(nextweek);
+                                                for (let _i = 0; _i < _rest; _i++) {
+                                                    nextweek[_i].occupution.push(line);
+                                                }
+                                            }
+
+                                        }
+                                    }
+                                }
+                            }
+                            //    console.log(thedayschedlues);
+                            //遍历3个事件
+                            //    for(let i=0;i<3;i++){
+
+                            //    }
+                        });
+                    }
+                    this.domdata = domData;
+
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
