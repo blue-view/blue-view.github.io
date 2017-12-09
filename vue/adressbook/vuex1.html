@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>vuex</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link href="css/style.css" rel="stylesheet"> -->
+</head>
+
+<body>
+    <div id="app">
+        <div> {{count}}</div>
+        <my-addbtn :count="count"></my-addbtn>
+        <my-removebtn :count="count"></my-removebtn>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://cdn.bootcss.com/vuex/3.0.1/vuex.min.js"></script>
+
+    <script>
+        var store = new Vuex.Store({
+            state: {
+                count: 0
+            },
+            mutations: {
+                add: function (state) {
+                    state.count++;
+                },
+                remove: function (state) {
+                    state.count--;
+                }
+            }
+        });
+
+        var vm = new Vue({
+            el: "#app",
+            computed: {
+                count: function () {
+                    return store.state.count;
+                }
+            },
+            components: {
+                "my-addbtn": {
+                    template: '<button @click="setCount">+</button>',
+                    methods: {
+                        setCount() {
+                            store.commit("add");
+                        }
+                    }
+                },
+                "my-removebtn": {
+                    template: '<button @click="setCount">-</button>',
+                    methods: {
+                        setCount() {
+                            store.commit("remove");
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
