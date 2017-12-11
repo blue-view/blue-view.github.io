@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>灵活的语言-javascript</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <p>
+        <h1>表单验证</h1>
+        <p>
+            <br />
+        </p>
+        <div style="color:#BBBBBB;background-color:#282C34;font-family:Consolas, &quot;font-size:14px;">
+            <div>
+                <div style="color:#BBBBBB;background-color:#282C34;font-family:Consolas, &quot;font-size:14px;">
+                    <div>
+                        <span style="color:#c678dd;">function</span> <span style="color:#61afef;">checkName</span><span style="color:#abb2bf;">()</span> <span style="color:#abb2bf;">{</span>
+                    </div>
+                    <div>
+                        <span style="color:#5c6370;font-style:italic;">//验证姓名</span>
+                    </div>
+                    <div>
+                        <span style="color:#abb2bf;">}</span>
+                    </div>
+        <br />
+                    <div>
+                        <span style="color:#c678dd;">function</span> <span style="color:#61afef;">checkEmail</span><span style="color:#abb2bf;">()</span> <span style="color:#abb2bf;">{</span>
+                    </div>
+                    <div>
+                        <span style="color:#5c6370;font-style:italic;">//验证邮箱</span>
+                    </div>
+                    <div>
+                        <span style="color:#abb2bf;">}</span>
+                    </div>
+        <br />
+                    <div>
+                        <span style="color:#c678dd;">function</span> <span style="color:#61afef;">checkPassword</span><span style="color:#abb2bf;">()</span> <span style="color:#abb2bf;">{</span>
+                    </div>
+                    <div>
+                        <span style="color:#5c6370;font-style:italic;">//验证密码</span>
+                    </div>
+                    <div>
+                        <span style="color:#abb2bf;">}</span>
+                    </div>
+                    <div>
+                        <span style="color:#c678dd;">var</span> <span style="color:#61afef;">CheckObject</span> <span style="color:#56b6c2;">=</span> <span style="color:#c678dd;">function</span> <span style="color:#abb2bf;">()</span> <span style="color:#abb2bf;">{};</span>
+                    </div>
+                    <div>
+                        <span style="color:#e5c07b;">CheckObject</span><span style="color:#abb2bf;">.</span><span style="color:#e06c75;">prototype</span> <span style="color:#56b6c2;">=</span> <span style="color:#abb2bf;">{</span>
+                    </div>
+                    <div>
+                        <span style="color:#61afef;">checkName</span><span style="color:#56b6c2;">:</span><span style="color:#c678dd;">function</span><span style="color:#abb2bf;">(){</span>
+                    </div>
+                    <div>
+                        <span style="color:#c678dd;">return</span> <span style="color:#d19a66;">true</span><span style="color:#abb2bf;">;</span>
+                    </div>
+                    <div>
+                        <span style="color:#abb2bf;">},</span>
+                    </div>
+                    <div>
+                        <span style="color:#61afef;">checkEmail</span><span style="color:#56b6c2;">:</span><span style="color:#c678dd;">function</span><span style="color:#abb2bf;">(){</span>
+                    </div>
+                    <div>
+                        <span style="color:#c678dd;">return</span> <span style="color:#e06c75;">this</span><span style="color:#abb2bf;">;</span>
+                    </div>
+                    <div>
+                        <span style="color:#abb2bf;">},</span>
+                    </div>
+                    <div>
+                        <span style="color:#61afef;">checkPassword</span><span style="color:#56b6c2;">:</span><span style="color:#c678dd;">function</span><span style="color:#abb2bf;">(){</span>
+                    </div>
+                    <div>
+                        <span style="color:#c678dd;">return</span> <span style="color:#e06c75;">this</span><span style="color:#abb2bf;">;</span>
+                    </div>
+                    <div>
+                        <span style="color:#abb2bf;">}</span>
+                    </div>
+                    <div>
+                        <span style="color:#abb2bf;">};</span>
+                    </div>
+                    <div>
+                        <span style="color:#c678dd;">var</span> <span style="color:#abb2bf;">checkobj</span><span style="color:#56b6c2;">=</span><span style="color:#c678dd;">new</span> <span style="color:#e5c07b;">CheckObject</span><span style="color:#abb2bf;">();</span>
+                    </div>
+                    <div>
+                        <span style="color:#e06c75;">checkobj</span><span style="color:#abb2bf;">.</span><span style="color:#61afef;">checkName</span><span style="color:#abb2bf;">().</span><span style="color:#61afef;">checkEmail</span><span style="color:#abb2bf;">().</span><span style="color:#61afef;">checkPassword</span><span style="color:#abb2bf;">();</span>
+                    </div>
+                    <div>
+                        <span style="color:#e5c07b;">Function</span><span style="color:#abb2bf;">.</span><span style="color:#e06c75;">prototype</span><span style="color:#abb2bf;">.</span><span style="color:#61afef;">addMethod</span><span style="color:#56b6c2;">=</span><span style="color:#c678dd;">function</span><span style="color:#abb2bf;">(name,fn){</span>
+                    </div>
+                    <div>
+                        <span style="color:#e06c75;">this</span><span style="color:#abb2bf;">[name]</span><span style="color:#56b6c2;">=</span><span style="color:#abb2bf;">fn;</span>
+                    </div>
+                    <div>
+                        <span style="color:#c678dd;">return</span> <span style="color:#e06c75;">this</span><span style="color:#abb2bf;">;</span>
+                    </div>
+                    <div>
+                        <span style="color:#abb2bf;">}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p>
+            <br />
+        </p>
+    </p>
+    <script>
+        function checkName() {
+            //验证姓名
+        }
+
+        function checkEmail() {
+            //验证邮箱
+        }
+
+        function checkPassword() {
+            //验证密码
+        }
+        var CheckObject = function () {};
+        CheckObject.prototype = {
+            checkName:function(){
+                return true;
+            },
+            checkEmail:function(){
+                return this;
+            },
+            checkPassword:function(){
+                return this;
+            }
+        };
+        var checkobj=new CheckObject();
+        checkobj.checkName().checkEmail().checkPassword();
+        Function.prototype.addMethod=function(name,fn){
+            this[name]=fn;
+            return this;
+        }
+    </script>
+</body>
+
+</html>
