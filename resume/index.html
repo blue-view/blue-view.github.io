@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Resume</title>
+    <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
+    <script src="./scripts/jquery-3.2.1.min.js"></script>
+    <script src="./bootstrap/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            padding-top: 70px;
+        }
+    </style>
+</head>
+
+<body class="container">
+    <header>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <div class="navbar-brand">Personal Resume</div>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#divNav">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div id="divNav" class="collapse navbar-collapse">
+                    <ul class="nav navbar navbar-right">
+                        <li>
+                            <button class="btn btn-success navbar-btn" data-toggle="modal" data-target="#myModal" title="Print">Print</button>
+                            <button type="button" class="btn btn-info navbar-btn" data-toggle="tooltip" data-placement="bottom" title="Download">
+                                Download
+                            </button>
+                            <script>
+                                $(function () {
+                                    $('[data-toggle="tooltip"]').tooltip();
+                                });
+                            </script>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </nav>
+    </header>
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Personal Info
+                </div>
+                <div class="panel-body">
+                    <img src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3623774136,2496569937&fm=27&gp=0.jpg" class="img-responsive img-rounded img-thumbnail"
+                        alt="">
+                    <p class="text-center text-primary">yang li</p>
+                    <address>
+                        <strong>fujian fuzhou</strong>
+                        <br/>
+                        <span class="glyphicon glyphicon-home" title="Addrsss">
+                            <code>福建省福州市</code>
+                        </span>
+                        <br/>
+                        <span class="glyphicon glyphicon-file" title="PostalCode">
+                            350200
+                        </span>
+                        <br/>
+                        <span class="glyphicon glyphicon-phone" title="Mobile">
+                            18259082011
+                        </span>
+                        <br/>
+                        <span class="glyphicon glyphicon-envelope" title="Email">
+                            yangliang@163.com
+                        </span>
+                    </address>
+                </div>
+            </div>
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    Personal Skill
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <span class="text-muted">HTML5</span>
+                        </div>
+                        <div class="col-sm-9">
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped active" style="width:85%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <span class="text-muted">.NET</span>
+                        </div>
+                        <div class="col-sm-9">
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped progress-bar-success active" style="width:90%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <span class="text-info">CSS3</span>
+                        </div>
+                        <div class="col-sm-9">
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped progress-bar-info active" style="width:90%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <span class="text-danger">jQuery</span>
+                        </div>
+                        <div class="col-sm-9">
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped progress-bar-danger active" style="width:80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Contact Me
+                </div>
+                <div class="panel-body">
+                    <form action="" class="form-horizontal">
+                        <div class="form-group">
+                            <label for="email" class="col-sm-2 control-label">Email</label>
+                            <div class="col-sm-10">
+                                <input type="email" id="email" class="form-control" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="col-sm-2 control-label">Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" id="name" class="form-control" placeholder="Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-primary pull-right">Send</button>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9">
+            <div class="jumbotron">
+                <p class="text-right small">
+                    参与制作超个10个以上的项目网站
+                    <br/> 参与制作超个10个以上的项目网站
+                    <br/> 参与制作超个10个以上的项目网站
+                    <br/> 参与制作超个10个以上的项目网站
+                    <br/> 参与制作超个10个以上的项目网站
+                    <br/> 参与制作超个10个以上的项目网站
+                    <br/>
+
+                </p>
+            </div>
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <a href="#collapseOne" data-toggle="collapse" data-parent="#accordion">
+                                Work Expreense
+                            </a>
+                            <div id="collapseOne" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <ul class="list-group">
+                                        <li class="list-group-item list-group-item-success">
+                                            <div class="row">
+                                                <div class="col-sm-4">2011/07-至今</div>
+                                                <div class="col-sm-4">XXX公司</div>
+                                                <div class="col-sm-4">软件工程师</div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item list-group-item-danger">
+                                            <div class="row">
+                                                <div class="col-sm-4">2011/07-至今</div>
+                                                <div class="col-sm-4">XXX公司</div>
+                                                <div class="col-sm-4">软件工程师</div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item list-group-item-list">
+                                            <div class="row">
+                                                <div class="col-sm-4">2011/07-至今</div>
+                                                <div class="col-sm-4">XXX公司</div>
+                                                <div class="col-sm-4">软件工程师</div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <a href="#collapseTwo" data-toggle="collapse" data-parent="#accordion">
+                                Edu Expreense
+                            </a>
+                            <div id="collapseTwo" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <ul class="list-group">
+                                        <li class="list-group-item list-group-item-success">
+                                            <div class="row">
+                                                <div class="col-sm-4">2011/07-至今</div>
+                                                <div class="col-sm-4">XXX学校</div>
+                                                <div class="col-sm-4">专业名称</div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item list-group-item-danger">
+                                            <div class="row">
+                                                <div class="col-sm-4">2011/07-至今</div>
+                                                <div class="col-sm-4">XXX学校</div>
+                                                <div class="col-sm-4">专业名称</div>
+                                            </div>
+                                        </li>
+                                        <li class="list-group-item list-group-item-list">
+                                            <div class="row">
+                                                <div class="col-sm-4">2011/07-至今</div>
+                                                <div class="col-sm-4">XXX学校</div>
+                                                <div class="col-sm-4">专业名称</div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <a href="#collapseThree" data-toggle="collapse" data-parent="#accordion">
+                                project Expreense
+                            </a>
+                            <div id="collapseThree" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <div id="divCarousel" class="carousel slide" data-ride="carousel">
+                                        <ol class="carousel-indicators">
+                                            <li data-target="#divCarousel" data-slide-to="0" class="active"></li>
+                                            <li data-target="#divCarousel" data-slide-to="1"></li>
+                                            <li data-target="#divCarousel" data-slide-to="2"></li>
+                                        </ol>
+                                        <div class="carousel-inner">
+                                            <div class="item active">
+                                                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513170566012&di=7cb76b9797f9e639e53394c3cc9b22f5&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F14%2F63%2F15%2F10u58PICTAJ_1024.jpg"
+                                                    alt="" class="img-responsive img-rounded">
+                                                <div class="carousel-caption">demo1</div>
+                                            </div>
+                                            <div class="item">
+                                                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513170566015&di=2154f4a482ccb635e10e7342b58a1b29&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F13%2F46%2F50%2F61758PICWZY_1024.jpg"
+                                                    alt="" class="img-responsive img-rounded">
+                                                <div class="carousel-caption">demo2</div>
+                                            </div>
+                                            <div class="item">
+                                                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1513170566015&di=830d829680477513afd0439d79a6e600&imgtype=0&src=http%3A%2F%2Fpic27.nipic.com%2F20130312%2F9252150_170410101000_2.jpg"
+                                                    alt="" class="img-responsive img-rounded">
+                                                <div class="carousel-caption">demo3</div>
+                                            </div>
+                                        </div>
+                                        <a href="#divCarousel" class="left carousel-control" data-slide="prev">
+                                            <span class="glyphicon glyphicon-chevron-left"></span>
+                                        </a>
+                                        <a href="#divCarousel" class="right carousel-control" data-slide="next">
+                                            <span class="glyphicon glyphicon-chevron-right"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <footer class="navbar-default navbar-fixed-bottom text-center">
+        All image and content &copy; yangli
+    </footer>
+
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                    <h4 class="modal-title">Print Resume</h4>
+                </div>
+                <div class="modal-body">
+                    Print Preview Or Print Config
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button class="btn btn-primary">Print</button>
+                </div>
+                <button class="btn btn-info navbar-btn"></button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
