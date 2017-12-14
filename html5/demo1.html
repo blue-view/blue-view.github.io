@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+    </head>
+    <body>
+            <canvas id="myCanvas"></canvas>
+            <script>
+                window.onload=function(){
+                    var c=document.getElementById("myCanvas");
+                    var cxt=c.getContext("2d");
+                    cxt.strokeStyle="#ff0000";
+                    cxt.lineWidth=10;
+                    cxt.beginPath();
+                    cxt.moveTo(20,20);
+                    cxt.lineTo(100,80);
+                    cxt.lineTo(200,50);
+                    cxt.stroke();
+                    cxt.closePath();
+                    
+
+                    cxt.fillStyle="#00ff00";
+                    cxt.beginPath();
+                    cxt.arc(100,100,50,0,Math.PI*2,true);
+                    cxt.closePath();
+                    cxt.fill();
+
+                    cxt.fillStyle="#0000ff";
+                    cxt.beginPath();
+                    cxt.arc(100,100,30,0,Math.PI*2,true);
+                    cxt.closePath();
+                    cxt.fill();
+
+                }
+            </script>
+    </body>
+</html>

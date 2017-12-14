@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>密码手势</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    html,body{
+        width:100%;
+        height: 100%;
+        overflow: hidden
+    }
+    </style>
+</head>
+
+<body>
+    <canvas id="myCanvas"></canvas>
+  
+</body>
+<script>
+        var c;
+        var cxt;
+        //9个密码点中心坐标
+        var pointLocations = [];
+        //已经经过点的序号
+        var pathPoints = [];
+        //半径
+        var R = 30;
+        //页边距
+        var spaceX = 50;
+        var spaceY = 50;
+
+        window.onload = function () {
+            c = document.getElementById("myCanvas");
+            c.width = document.body.offsetWidth;
+            c.height = document.body.offsetHeight;
+            cxt = c.getContext("2d");
+            ///算出2个点距离
+            var x = (c.width - spaceX * 2 - R * 2 * 3) / 2;
+            var y = (c.height - spaceY * 2 - R * 2 * 3) / 2;
+            //算出9个点坐标
+            for (var row = 0; row < 3; row++) {
+                for (var col = 0; col < 3; col++) {
+                    var point = {
+                        x: spaceX + col * x + (col * 2 + 1) * R,
+                        y: spaceY + row * y + (row * 2 + 1) * R,
+                    }
+                    pointLocations.push(point);
+
+                }
+            }
+            // console.log(pointLocations);
+            initEvent();
+            draw();
+        }
+        //鼠标有没有落在某个密码点上
+        function isPointSelect(t){
+            for(var i=0;i<pointLocations.length;i++){
+                var p=pointLocations[i];
+                var xdiff=Math.abs(p.x-t.pageX);
+                var ydiff=Math.abs(p.y-t.pageY);
+                var d=Math.pow(xdiff*xdiff+ydiff*ydiff,.5);
+                if(d<R){
+                    if(pathPoints.indexOf(i)<0){
+                        pathPoints.push(i);
+                    }
+                    break;
+                }
+            }
+        }
+        //绘制图像
+        function draw(touches) {
+            //清楚画布
+            cxt.clearRect(0, 0, c.width, c.height);
+            //重回
+            //line
+            cxt.lineWidth=10;
+            cxt.strokeStyle="#ff0000";
+            cxt.beginPath();
+            for(var i=0;i<pathPoints.length;i++){
+                var idx=pathPoints[i];
+                cxt.lineTo(pointLocations[idx].x,pointLocations[idx].y);
+            }
+            cxt.stroke();
+            cxt.closePath();
+            if(touches!=null){
+                var lastIdx=pathPoints[pathPoints.length-1];
+                var last=pointLocations[lastIdx];
+                // console.log(last);
+                cxt.beginPath();
+                cxt.moveTo(last.x,last.y);
+                cxt.lineTo(touches.pageX,touches.pageY);
+                cxt.stroke();
+                cxt.closePath();
+            }
+            //9个点
+            for (var i = 0; i < pointLocations.length; i++) {
+                var point = pointLocations[i];
+                cxt.fillStyle = "#00ff00";
+                cxt.beginPath();
+                cxt.arc(point.x, point.y, R, 0, Math.PI * 2, true);
+                cxt.closePath();
+                cxt.fill();
+
+                cxt.fillStyle = "#ffffff";
+                cxt.beginPath();
+                cxt.arc(point.x, point.y, R-3, 0, Math.PI * 2, true);
+                cxt.closePath();
+                cxt.fill();
+            }
+        }
+        //touch
+        function initEvent() {
+            c.addEventListener("touchstart", function (e) {
+                isPointSelect(e.touches[0]);
+
+            });
+            c.addEventListener('touchmove', function (e) {
+                var touches=e.touches[0]
+                isPointSelect(touches);
+                draw(touches);
+            });
+            c.addEventListener("touchend", function (e) {
+                draw(null);
+                if(pathPoints.length>0){
+                    console.log(pathPoints.join("->"));
+                }
+            });
+        }
+    </script>
+</html>
