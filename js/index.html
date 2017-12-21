@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <input type="text" id="input" maxlength="4">
+    <input type="button" value="点击生成验证码" id="code" onclick="createCode();">
+    <input type="button" value="验证" onclick="validCode();">
+    <script>
+        var code;
+
+        function createCode() {
+            code = ""; //保留验证码;
+            var codeLength = 4; //随机验证码的长度
+            var checkCode = document.querySelector("#code");
+            var random = new Array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
+                'L', 'M', 'N', '0', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'w', 'X', 'Y', 'Z'
+            ); //随机苏【0,1）;//不能用四舍五入，不能向上取整
+
+            for (var i = 0; i < codeLength; i++) {
+                var randomNumber = Math.random() * 36;
+                var index = Math.floor(randomNumber); //[0,36)];
+                code += random[index];
+            }
+            console.log(code);
+            checkCode.value = code;
+        }
+
+        function validCode() {
+            var inputCode = document.querySelector("#input").value.toUpperCase();
+            if (input.length == 0) {
+                alert("验证码不能为空");
+            } else if (inputCode != code) {
+                alert("验证码输入错误");
+                document.querySelector("#code").value = "";
+                createCode();
+            } else {
+                alert("验证码正确");
+            }
+        }
+    </script>
+</body>
+
+</html>
