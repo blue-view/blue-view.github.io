@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>建造者模式</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <script>
+        var Huamn = function (param) {
+            this.skill = param && param.skill || '保密';
+            this.hobby = param && param.hobby;
+        }
+        Huamn.prototype = {
+            getSkill: function () {
+                return this.skill;
+            },
+            getHobby: function () {
+                return this.hobby;
+            }
+        }
+        var Named = function (name) {
+            var that = this;
+            (function (name, that) {
+
+            })(name, that);
+        }
+        var Work = function (work) {
+            var that = this;
+            (function (work, that) {
+
+            })(work, that);
+        }
+        Work.prototype.changeWork = function (work) {
+            this.work = work;
+        }
+        Work.prototype.changeDesc = function (desc) {
+            this.workDesc = desc;
+        }
+        /**
+         **
+         **/
+        var Person = function (name, work) {
+            var _person = new Huamn();
+            _person.name = new Named(name);
+            _person.work = new Work(work);
+            return _person;
+        }
+    </script>
+</body>
+
+</html>

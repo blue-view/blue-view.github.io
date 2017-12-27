@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>构造函数继承和类似继承</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <script>
+        //构造函数继承
+        //声明父类
+        function SuperClass(name){
+            this.books=['js','html','css'];
+            this.id=name;
+        }
+        SuperClass.prototype.showBooks=function(){
+            console.log(this.name);
+        }
+        //声明子类
+        function SubClass(name,time){
+            //继承父类
+            SuperClass.call(this,name);
+            this.time=time;
+        }
+        //类式继承，子类原型继承父类
+        SubClass.prototype=new SuperClass();
+        //子类原型方法
+        SubClass.prototype.getTime=function(){
+            console.log(this.time);
+        }
+        </script>
+    </body>
+</html>

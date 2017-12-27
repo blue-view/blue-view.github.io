@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>寄生式继承</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body>
+     <script>
+         function inheritObject(o){
+             //声明一个过渡函数
+             function F(){}
+             F.prototype=O;
+             return new F();
+         }
+         var book={
+             name:"js book",
+             alikeBook:[
+                 "css book",
+                 "html book"
+             ]
+         };
+         function createBook(obj){
+            var o=new inheritObject(obj);
+            o.getName=function(){
+                console.log(name);
+            };
+            return o;
+         }
+     </script>
+    </body>
+</html>

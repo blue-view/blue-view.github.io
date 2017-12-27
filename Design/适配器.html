@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <script>
+        //Jquery适配器
+        window.A = A = jQuery;
+        //定义框架
+        // var A = A || {};
+        A.g = function (id) {
+            // return $(id).get(0);
+            return document.getElementById(id);
+        };
+        A.on = function (id, type, fn) {
+            //对于支持DOM2级事件处理程序addEventListener方法的浏览器
+            // var dom = document.getElementById(id);
+            var dom = typeof id === 'string' ? this.g(id) : id;
+            if (dom.addEventListener) {
+                dom.addEventListener(type, fn.false);
+            } else if (dom.attachEvent) {
+                dom.attachEvent('on' + type, fn);
+            } else {
+                dom['on' + type] = fn;
+            }
+        }
+        A.on(window, 'load', function () {
+            A.on('mybutton', click, function () {
+                //do somethting
+            });
+        });
+    </script>
+</body>
+
+</html>

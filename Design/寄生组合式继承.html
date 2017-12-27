@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>寄生组合式继承</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <script>
+        function inheritObject(o) {
+            //声明一个过渡函数
+            function F() {}
+            F.prototype = O;
+            return new F();
+        }
+        var book = {
+            name: "js book",
+            alikeBook: [
+                "css book",
+                "html book"
+            ]
+        };
+
+        function inheritPrototype(subClass, superClass) {
+            var p = new inheritObject(superClass.prototype);
+            p.constructor = subClass;
+            subClass.prototype = p;
+        }
+        //单继承 属性复制
+        var extend = function (target, source) { //浅复制
+            //遍历元对象中属性
+            for (var property in source) {
+                target[property] = source[property];
+            }
+            //返回目标对象
+            return target;
+        }
+        //多继承 属性复制
+        var mix = function () {
+            var i = 1, //从第二个参数起为被继承的对象
+                len = arguments.length, //获取参考长度
+                target = arguments[0], //第一个对象目标对象
+                arg, //缓存参数对象
+                //遍历被继承的对象
+                for (; i < len; i++) {
+                    //缓存当前对象
+                    arg = arguments[i];
+                    //遍历被继承对象中的属性
+                    for (var property in arg) {
+                        //将被继承对象属性复制到目标对象中
+                        target[property] = arg[property];
+                    }
+                }
+        }
+    </script>
+</body>
+
+</html>

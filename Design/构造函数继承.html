@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>构造函数继承</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <script>
+        //构造函数继承
+        //声明父类
+        function SuperClass(id){
+            this.books=['js','html','css'];
+            this.id=id;
+        }
+        SuperClass.prototype.showBooks=function(){
+            console.log(this.books);
+        }
+        //声明子类
+        function SubClass(id){
+            //继承父类
+            SuperClass.call(this,id);
+        }
+        //创建第一个子类的实例
+        var  instance1=new SubClass(10);
+        //创建第二个子类的实例
+        var instance2=new SuperClass(11);
+
+        instance1.books.push("设计模式");
+        console.log(instance1.books);
+        console.log(instance1.id);
+        </script>
+    </body>
+</html>

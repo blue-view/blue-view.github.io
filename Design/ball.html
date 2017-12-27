@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>设计模式</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <canvas id="myCanvas" width="1000" height="400" style="background:#000"></canvas>
+    <script>
+        //绘制一个小球
+        var myCanvas = document.getElementById("myCanvas");
+        var cxt=myCanvas.getContext("2d");
+        //获取渲染的上下文
+        var width = myCanvas.width;
+        var height = myCanvas.height;
+        cxt.fillStyle="#ff0000";
+        //绘制一个小球
+        function Ball(x, y, r) {
+            //讲横纵坐标，以及半径保存
+            this.x = x;
+            this.y = y;
+            this.r = r;
+        }
+        //小球的横纵坐标以及半径不能共享的，但是绘制的方法是可以共享的
+        Ball.prototype.draw=function(){
+            cxt.arc(this.x,this.y,this.r,0,2*Math.PI,true);
+            cxt.fill();
+        };
+        var x1=Math.random()*width;
+        var y1=Math.random()*height;
+        var r1=Math.random()*10+10;
+        // console.log(height,width,x1,y1,r1);
+        //实例化小球
+        var ball=new Ball(x1,y1,r1);
+        ball.draw();
+        // console.log(myCanvas,this);
+    </script>
+</body>
+
+</html>

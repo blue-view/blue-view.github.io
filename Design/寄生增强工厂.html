@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>寄生增强工厂</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <canvas id="myCanvas" width="1000" height="400" style="background:#000"></canvas>
+    <script>
+        //绘制一个小球
+        var myCanvas = document.getElementById("myCanvas");
+        var ctx = myCanvas.getContext("2d");
+        //获取渲染的上下文
+        var width = myCanvas.width;
+        var height = myCanvas.height;
+        ctx.fillStyle = "#ff0000";
+        //绘制一个小球
+        function Ball(x, y, r) {
+            //讲横纵坐标，以及半径保存
+            this.x = x;
+            this.y = y;
+            this.r = r;
+        }
+        //小球的横纵坐标以及半径不能共享的，但是绘制的方法是可以共享的
+        Ball.prototype.draw = function () {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, true);
+            ctx.fill();
+            ctx.closePath();
+        };
+
+        function MoveBallFactory() {
+            var x = Math.random() * width;
+            var y = Math.random() * height;
+            var r = Math.random() * 10 + 10;
+            if (x - r < 0) {
+                x = r;
+            } else if (x + r > width) {
+                x = width - r;
+            }
+            if (y - r < 0) {
+                y = r;
+            } else if (y + r > height) {
+                y = height - r;
+            }
+            var ball = new Ball(x, y, r);
+            //拓展一些方法
+            ball.vx = Math.random() * 2 + 2;
+            ball.vy = Math.random() * 2 + 2;
+
+            ball.move = function () {
+                var me = this;
+                setInterval(function () {
+                    if (me.x - me.r < 0 || me.x + me.r > width) {
+                        me.vx = -me.vx;
+                    }
+                    if (me.y - me.r < 0 || me.y + me.r > height) {
+                        me.vy = -me.vy;
+                    }
+                    me.x += me.vx;
+                    me.y += me.vy;
+                    ctx.clearRect(0, 0, width, height);
+                    me.draw();
+                });
+            }
+            return ball;
+        }
+        var ballobj = MoveBallFactory();
+        ballobj.move();
+    </script>
+</body>
+
+</html>

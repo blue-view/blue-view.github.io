@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>设计模式</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <canvas id="myCanvas" width="1000" height="400" style="background:#000"></canvas>
+    <script>
+        //绘制一个小球
+        var myCanvas = document.getElementById("myCanvas");
+        var cxt = myCanvas.getContext("2d");
+        //获取渲染的上下文
+        var width = myCanvas.width;
+        var height = myCanvas.height;
+        cxt.fillStyle = "#ff0000";
+        //绘制一个小球
+        function Ball(x, y, r) {
+            //讲横纵坐标，以及半径保存
+            this.x = x;
+            this.y = y;
+            this.r = r;
+        }
+        //小球的横纵坐标以及半径不能共享的，但是绘制的方法是可以共享的
+        Ball.prototype.draw = function () {
+            cxt.beginPath();
+            cxt.arc(this.x, this.y, this.r, 0, 2 * Math.PI, true);
+            cxt.fill();
+            cxt.closePath();
+        };
+        var BallFactory = function (num) {
+            if (num) {
+                var ballArr = [];
+                for (var i = 0; i < num; i++) {
+                    ballArr.push(BallFactory());
+                }
+                return ballArr;
+            } else {
+                var x = Math.random() * width;
+                var y = Math.random() * height;
+                var r = Math.random() * 10 + 10;
+                var ball = new Ball(x, y, r);
+                //讲结果返回
+                return ball;
+            }
+
+        }
+        // var ball1 = BallFactory();
+        // ball1.draw();
+        // BallFactory(50, 50, 20).draw();
+        // BallFactory().draw();
+        //批量生产工厂
+        // function ManyBallFactory(num) {
+        //     //创建一个容器存储创建的小球
+        //     var ballArr = [];
+        //     for (var i = 0; i < num; i++) {
+        //         ballArr.push(new BallFactory());
+        //     }
+        //     return ballArr;
+        // }
+        // var ballArr = ManyBallFactory(20);
+        // ballArr.forEach((value, index, arr) => {
+        //     value.draw();
+        // });
+        BallFactory(15).forEach(ball => {
+            ball.draw();
+        });
+    </script>
+</body>
+
+</html>
