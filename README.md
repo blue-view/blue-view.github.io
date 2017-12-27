@@ -1,1 +1,0 @@
-# blue-view.github.io
