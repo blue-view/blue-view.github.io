@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 100px;
+            height: 100px;
+            border: 1px solid #000;
+            padding: 100px;
+        }
+
+        .div {
+            margin: 50px;
+            width: 50px;
+            height: 50px;
+            background: red;
+            transition: .1s;
+            /* transform: center center; */
+            transform-origin: left center;
+        }
+    </style>
+</head>
+
+<body>
+    <!--
+        transform变换
+     x   -webkit-transform
+    -->
+    <div id="box">
+        <div class="div"></div>
+        <div class="div"></div>
+    </div>
+    <script>
+        document.addEventListener("touchstart", function (ev) {
+            ev.preventDefault();
+        });
+        window.onload = function () {
+            var divs = document.querySelectorAll(".div");
+                console.log(divs);
+            /**
+                围绕中心点进行设置
+                rotate:旋转
+                skey:倾斜
+                scale:放大
+                translate:平移
+                transform-origin:center center//变换基点
+                关键字，百分比，距离单位(px,rem,em);
+            **/
+            // div.style.WebkitTransform=div.style.transform="rotate(360deg)";
+            // div.style.WebkitTransform=div.style.transform="skew(45deg)";
+            // div.style.WebkitTransform=div.style.transform="scale(2,1)";
+            // div.style.WebkitTransform=div.style.transform="translate(-100px,-100px)";
+            divs[0].addEventListener("touchend", function () {
+
+                this.style.WebkitTransform = this.style.transform = "scale(.5) translate(100px)";
+
+            });
+            divs[1].addEventListener("touchend", function () {;
+                this.style.WebkitTransform = this.style.transform = "scale(.5) translate(100px)";
+            });
+        }
+    </script>
+</body>
+
+</html>

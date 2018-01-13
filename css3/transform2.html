@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+        }
+
+        body,
+        html {
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        header {
+            height: 400px;
+            font-size: 20px;
+            color: #fff;
+            background: #000;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+        }
+
+        #wrap {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            top: 40px;
+            overflow: hidden;
+        }
+
+        #list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        #list li {
+            height: 30px;
+            border-bottom: 1px solid #000;
+            line-height: 30px;
+            text-indent: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>趣味滑屏</header>
+    <div id="warp">
+        <ul id="list"></ul>
+    </div>
+
+    <script>
+        window.onload = function () {
+            setListener();
+            var warp = document.querySelector("#warp");
+            var list = document.querySelector("#list");
+            var startPoint = 0;
+            var startEl = 0;
+            var elTranslateY = 0;
+            document.addEventListener("touchstart", function (ev) {
+                ev.preventDefault();
+
+            });
+            list.addEventListener("touchstart", function (e) {
+                startPoint = e.changedTouches[0].pageY;
+                startEl = elTranslateY;
+            });
+            list.addEventListener("touchmove", function (e) {
+                var newPoint = e.changedTouches[0].pageY;
+                // console.log(newPoint - startPoint);
+                var dis = newPoint - startPoint;
+                elTranslateY = startEl + dis;
+                console.log(elTranslateY);
+                list.style.WebkitTransform = list.style.transform = "translateY(" + elTranslateY + "px)";
+
+            });
+        }
+
+        function setListener() {
+            var list = document.querySelector("#list");
+            var inner = "";
+            for (var i = 0; i < 100; i++) {
+                inner += "<li>这是第" + (i + 1) + "个li</li>";
+            }
+            list.innerHTML = inner;
+        }
+    </script>
+</body>
+
+</html>
