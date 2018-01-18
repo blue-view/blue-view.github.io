@@ -20,6 +20,9 @@
 <body>
     <div id="box"></div>
     <script>
+        document.addEventListener("touchstart",function(ev){
+            ev.preventDefault();
+        });
         /**
         当手机触摸元素，当前屏幕上有两根或者两根以上的手指执行
         */
@@ -28,7 +31,7 @@
                 this.style.background="blue";
             });
 
-            
+
         }
     </script>
 </body>
